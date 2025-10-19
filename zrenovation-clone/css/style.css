@@ -5,52 +5,7 @@ body {
     background: #f5f5f5;
 }
 header {
-    background: #222;
-    color: #fff;
-    padding: 0;
-}
-.header-container {
-    display: flex;
-    align-items: center;         /* Centre verticalement le contenu */
-    justify-content: space-between;
-    padding: 40px 40px;
-    height: 100px;               /* Ajoute une hauteur fixe pour garantir le centrage */
-    box-sizing: border-box;
-    position: relative; /* Ajouté pour le positionnement du logo */
-}
-.header-container .site-logo {
-    position: relative;
-    z-index: 30;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-}
-.header-container .site-logo img {
-    max-height: 180px; /* même taille que sur la page d'accueil */
-    width: auto;
-    display: block;
-    object-fit: contain;
-    background: transparent;
-    margin: 0;
-    padding: 0;
-}
-.site-nav {
-    margin-left: auto;
-    position: relative;
-    z-index: 40;
-    display: flex;
-    align-items: center;
-}
-.site-nav.is-open {
-    display: flex;
-}
-.nav-toggle {
-    display: none;
-    align-items: center;
-    gap: 10px;
-    margin-left: auto;
-    font-size: 1rem;
-    font-weight: 600;
+
     color: #fff;
     background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.3);
@@ -207,7 +162,7 @@ nav a:focus {
     gap: 12px;
     width: 100%;
     max-width: 520px;
-    padding-bottom: 28px;
+    padding-bottom: 16px;
 }
 
 .hero-slider-viewport {
@@ -255,7 +210,7 @@ nav a:focus {
 
 .hero-slider-dots {
     position: absolute;
-    bottom: -28px;
+    bottom: -18px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -292,7 +247,7 @@ nav a:focus {
         font-size: 1.2rem;
     }
     .hero-slider-dots {
-        bottom: -24px;
+        bottom: -16px;
     }
 }
 
@@ -387,6 +342,52 @@ button:hover {
     justify-content: center;     /* Centre verticalement si besoin */
     min-height: 80px;           /* Ajuste la hauteur si tu veux plus d'espace */
 }
+
+.hero-intro {
+    width: 100%;
+    max-width: 1100px;
+    margin: 48px auto 36px auto;
+    padding: 0 4vw;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 48px;
+}
+
+.hero-intro-heading {
+    flex: 0 0 260px;
+    max-width: 260px;
+}
+
+.hero-intro-heading h2 {
+    margin: 0;
+    text-align: left;
+}
+
+.hero-intro-content {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.hero-intro p {
+    margin: 0;
+}
+
+@media (max-width: 820px) {
+    .hero-intro {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 18px;
+    }
+
+    .hero-intro-heading {
+        max-width: none;
+    }
+}
+
 .texte-centre-principal h2 {
     font-family: 'Poppins', Arial, sans-serif;
     font-size: 2rem;
@@ -420,13 +421,20 @@ button:hover {
     flex-direction: row; /* Assure la disposition côte à côte */
 }
 
+
 .hero-slider-section {
     height: auto;
-    min-height: 540px;
+    min-height: 0;
     align-items: flex-start;
     justify-content: center;
-    gap: 28px;
-    padding: 60px 8vw 80px;
+    gap: 24px;
+    padding: 32px 6vw 32px;
+}
+
+.banniere-couleur-full.hero-slider-section {
+    height: auto;
+    min-height: 0;
+    padding: 32px 6vw 32px;
 }
 
 .hero-slider-section .texte-haut-banniere {
@@ -561,6 +569,12 @@ button:hover {
     display: block;
 }
 
+.banniere-blanche-full.home-qualities {
+    height: auto;
+    min-height: 0;
+    padding: 0;
+}
+
 /* Descend légèrement les cadres dans la bannière blanche pour un centrage visuel */
 .banniere-blanche-full .cadres-photos-banniere {
     transform: translateY(38%); /* ajuste cette valeur si tu veux descendre/monter davantage */
@@ -582,28 +596,27 @@ button:hover {
 }
 
 .banniere-blanche-textes {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    height: 100%;
-    max-width: 1600px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 48px;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 0 0 0 100px;
+    padding: 20px 6vw 24px;
     box-sizing: border-box;
-    gap: 100px; /* Augmente encore l'espace entre les 3 blocs */
+    align-items: start;
 }
 
 .banniere-blanche-texte {
     position: static !important;
     background: transparent !important;
-    padding: 40px 24px !important; /* valeur neutre ; adapte si besoin */
+    padding: 0 !important;
     box-shadow: none !important;
     border: none !important;
-    max-width: 420px;
+    max-width: none;
     box-sizing: border-box;
     transform: none !important;
     transition: none !important;
-    text-align: center; /* conserve l'alignement précédent */
+    text-align: left;
 }
 
 /* Désactive les pseudo-éléments (trombone / coin) */
@@ -631,11 +644,27 @@ button:hover {
 .banniere-blanche-texte h3 {
     margin: 0 0 12px 0;
     font-size: 1.7rem;
+    color: #111;
 }
 .banniere-blanche-texte p {
     margin: 0;
     font-size: 1.05rem;
     line-height: 1.6;
+    color: #333;
+}
+
+@media (max-width: 900px) {
+    .banniere-blanche-textes {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 36px;
+    }
+}
+
+@media (max-width: 600px) {
+    .banniere-blanche-textes {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
 }
 
 .photo-apropos-gauche {
