@@ -135,15 +135,12 @@
         .contact-side{background:#222;color:#fff;padding:20px;border-radius:8px;}
         .form-success{display:none;background:#e6ffed;border:1px solid #a6e6b8;color:#0a5a20;padding:12px;border-radius:6px;margin-top:12px;}
 
-        /* Force la nav à rester sur la droite de la bannière et conserve le logo centré
-           -> suppression de la règle locale qui forçait la taille du logo afin
-              qu'il hérite de la taille définie globalement (css/style.css) */
+        /* Harmonise l'entête avec les autres pages : nav à droite, logo aligné à gauche */
     .header-container { position: relative; display:flex; align-items:center; box-sizing:border-box; }
     .site-nav { margin-left: auto; z-index: 40; }
     .site-nav ul { list-style:none; margin:0; padding:0; display:flex; gap:18px; align-items:center; }
     .site-nav a { color:inherit; text-decoration:none; padding:6px 8px; display:inline-block; }
-        /* garde le logo centré, hors flux, sans affecter la nav */
-        .header-container .site-logo { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); pointer-events:none; z-index:30; }
+        .header-container .site-logo { position:relative; display:flex; align-items:center; justify-content:flex-start; z-index:30; }
         /* NOTE : la règle .header-container .site-logo img a été retirée ici pour que
                  la taille du logo soit uniforme sur toutes les pages (définie dans css/style.css) */
     </style>
