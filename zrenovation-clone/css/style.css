@@ -420,6 +420,25 @@ button:hover {
     flex-direction: row; /* Assure la disposition côte à côte */
 }
 
+.hero-slider-section {
+    height: auto;
+    min-height: 540px;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 28px;
+    padding: 60px 8vw 80px;
+}
+
+.hero-slider-section .texte-haut-banniere {
+    max-width: 480px;
+    padding-right: 16px;
+    justify-content: flex-start;
+}
+
+.hero-slider-section .hero-slider {
+    margin-top: 0;
+}
+
 .texture-granit-droite {
     position: absolute;
     top: 0;
@@ -433,14 +452,14 @@ button:hover {
 
 .texte-haut-banniere {
     position: static;
-    max-width: 420px;
-    text-align: left;
+    max-width: 520px;
+    text-align: right;
     color: #222;
     padding-left: 0;
-    padding-right: 80px; /* Plus d'espace entre le texte et les images */
+    padding-right: 32px;
     display: flex;
     flex-direction: column;
-    align-items: flex-end; /* Aligne le texte à droite du bloc */
+    align-items: flex-end;
     justify-content: center;
     height: auto;
 }
@@ -452,6 +471,7 @@ button:hover {
     margin-bottom: 14px;
     margin-top: 0;
     letter-spacing: 1px;
+    text-align: right;
 }
 .texte-haut-banniere p {
     font-family: 'Poppins', Arial, sans-serif;
@@ -459,6 +479,7 @@ button:hover {
     font-weight: 500;
     margin: 0;
     line-height: 1.6;
+    text-align: right;
 }
 
 /* Centrage parfait des cadres dans les deux bannières (beige et blanche) */
