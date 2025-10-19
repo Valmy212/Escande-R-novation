@@ -726,60 +726,151 @@ button:hover {
     }
 }
 
-.photo-apropos-gauche {
-    position: absolute;
-    top: 50%;
-    left: 16vw;                /* Décale encore plus vers le centre */
-    transform: translateY(-50%);
-    height: 80%;
-    width: auto;
-    max-width: 48vw;
-    display: flex;
+.apropos-intro {
+    width: 100%;
+    padding: clamp(48px, 7vw, 100px) 5vw;
+    background: linear-gradient(135deg, #f6f2e9 0%, #ffffff 60%);
+    box-sizing: border-box;
+}
+
+.apropos-intro-wrapper {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(32px, 5vw, 72px);
     align-items: center;
-    justify-content: flex-start;
-    z-index: 2;
-    overflow: visible;
-    background: none;
-    border-radius: 0;
-    box-shadow: none;
 }
 
-.photo-apropos-gauche img {
-    width: auto;
-    height: 100%;
-    max-width: 100%;
-    object-fit: contain;      /* Affiche toute la photo sans la couper */
-    display: block;
+.apropos-intro-image {
+    position: relative;
 }
 
-.texte-apropos-droite {
+.apropos-intro-image::after {
+    content: "";
     position: absolute;
-    top: 50%;
-    left: calc(16vw + 44vw); /* Décale le texte plus à gauche */
-    transform: translateY(-50%);
-    width: 540px;
-    max-width: 40vw;
-    text-align: left;
-    color: #222;
+    inset: 18px 18px -18px -18px;
+    border-radius: 24px;
+    background: rgba(191, 167, 122, 0.12);
+    z-index: 0;
+}
+
+.apropos-intro-image img {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 24px;
+    object-fit: cover;
+    box-shadow: 0 28px 60px rgba(0, 0, 0, 0.18);
+}
+
+.apropos-intro-text {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: center;
-    background: none;
-    z-index: 2;
+    gap: clamp(12px, 2vw, 20px);
+    color: #222;
 }
 
-.texte-apropos-droite h2 {
-    font-size: 2rem;
-    font-weight: bold;
-    margin: 0 0 24px 0;
-    letter-spacing: 1px;
+.apropos-intro-eyebrow {
+    display: inline-block;
+    font-size: 0.9rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #bfa77a;
+    font-weight: 600;
 }
-.texte-apropos-droite p {
-    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
-    font-size: 1rem;
-    line-height: 1.6;
+
+.apropos-intro-text h1 {
+    margin: 0;
+    font-size: clamp(2rem, 3.4vw, 2.8rem);
+    line-height: 1.1;
+    font-weight: 700;
+}
+
+.apropos-intro-text p {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #3a3a3a;
+}
+
+.apropos-intro-highlight {
+    margin-top: clamp(10px, 1.8vw, 20px);
+    padding: 22px 26px;
+    background: #ffffff;
+    border-left: 4px solid #bfa77a;
+    border-radius: 18px;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.12);
+}
+
+.apropos-intro-highlight p {
+    margin: 0;
+    font-size: 1.02rem;
+    line-height: 1.7;
+    color: #2b2b2b;
+}
+
+.apropos-values {
+    padding: clamp(44px, 7vw, 96px) 5vw;
+    background: #222;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+.apropos-values-wrapper {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(28px, 4vw, 48px);
+}
+
+.apropos-values-intro h2 {
     margin: 0 0 18px 0;
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    font-weight: 700;
+}
+
+.apropos-values-intro p {
+    margin: 0;
+    max-width: 660px;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.82);
+}
+
+.apropos-values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(20px, 3vw, 36px);
+}
+
+.apropos-value-card {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    padding: 26px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.28);
+}
+
+.apropos-value-card h3 {
+    margin: 0;
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.apropos-value-card p {
+    margin: 0;
+    font-size: 1.02rem;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.85);
 }
 /* Répartition et centrage des 4 cadres dans la bannière blanche */
 .banniere-blanche-full .cadres-photos-banniere {
@@ -943,10 +1034,6 @@ button:hover {
     .texte-haut-banniere {
         max-width: 320px;
     }
-    .texte-apropos-droite {
-        width: 380px;
-        max-width: 48vw;
-    }
 }
 
 @media (max-width: 1200px) {
@@ -957,10 +1044,6 @@ button:hover {
     .banniere-blanche-texte,
     .texte-haut-banniere {
         max-width: 220px;
-    }
-    .texte-apropos-droite {
-        width: 260px;
-        max-width: 60vw;
     }
     .banniere-blanche-textes {
         gap: 40px;
@@ -1001,28 +1084,6 @@ button:hover {
         gap: 32px;
         padding-left: 0;
     }
-    .photo-apropos-gauche {
-        position: static;
-        left: 0;
-        top: 0;
-        transform: none;
-        width: 90vw;
-        max-width: 90vw;
-        height: 220px;
-        margin: 0 auto 24px auto;
-        justify-content: center;
-    }
-    .texte-apropos-droite {
-        position: static;
-        left: 0;
-        top: 0;
-        transform: none;
-        width: 90vw;
-        max-width: 90vw;
-        margin: 0 auto;
-        align-items: center;
-        text-align: center;
-    }
 }
 
 @media (max-width: 600px) {
@@ -1052,7 +1113,6 @@ button:hover {
         font-size: 1rem;
     }
     .texte-centre-principal,
-    .texte-apropos-droite,
     .banniere-blanche-texte,
     .texte-haut-banniere {
         max-width: 98vw;
@@ -1062,6 +1122,55 @@ button:hover {
     .banniere-blanche-full {
         min-height: 400px;
         padding: 20px 0;
+    }
+}
+
+@media (max-width: 1024px) {
+    .apropos-intro-wrapper {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: clamp(24px, 6vw, 48px);
+    }
+    .apropos-intro-text {
+        align-items: center;
+    }
+    .apropos-intro-highlight {
+        text-align: left;
+        width: 100%;
+    }
+    .apropos-values-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 720px) {
+    .apropos-intro {
+        padding: clamp(36px, 10vw, 60px) 6vw;
+    }
+    .apropos-values {
+        padding: clamp(36px, 11vw, 60px) 6vw;
+    }
+    .apropos-intro-image::after {
+        inset: 12px;
+    }
+    .apropos-values-grid {
+        grid-template-columns: 1fr;
+    }
+    .apropos-value-card {
+        padding: 24px 22px;
+    }
+    .apropos-intro-text h1,
+    .apropos-values-intro h2 {
+        text-align: center;
+    }
+}
+
+@media (max-width: 520px) {
+    .apropos-intro-image::after {
+        inset: 8px;
+    }
+    .apropos-intro-highlight {
+        padding: 18px 20px;
     }
 }
 
