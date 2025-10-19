@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact - Escande Rénovation</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- Leaflet CSS pour la carte -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <style>
+        /* NAV : alignement à droite identique à index.html et stabilité (évite déplacement au clic) */
+        .header-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 10px 4vw;
+            box-sizing: border-box;
+        }
+        .header-container .site-logo {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 30;
+            display: block;
+        }
+        .header-container nav {
+            margin-left: auto !important;
+            z-index: 40;
+            display: flex;
+            align-items: center;
+        }
+        .header-container nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 18px;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        .header-container nav li { display: inline-block; }
+
+        /* --- Stabilité des onglets : réserver l'espace (border transparent) et garder métriques identiques --- */
+        .header-container nav a {
+            box-sizing: border-box;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 10px;
+            color: inherit;
+            text-decoration: none !important;
+            background: transparent;
+            border: 2px solid transparent; /* réserve l'espace si on veut afficher une bordure au focus */
+            outline: none;
+            transition: color .18s ease, transform .18s ease, box-shadow .18s ease;
+            -webkit-tap-highlight-color: transparent;
+            font-weight: 700; /* même graisse dans tous les états */
+        }
+        /* s'assurer que tous les états conservent exactement la même boîte (pas de reflow) */
+        .header-container nav a:focus,
+        .header-container nav a:hover,
+        .header-container nav a:active,
+        .header-container nav a.active,
+        .header-container nav a:visited {
+            font-weight: 700;
+            padding: 8px 10px;
+            border-color: transparent;
+        }
+        /* affichage d'un halo au focus sans toucher à la métrique */
+        .header-container nav a:focus {
+            box-shadow: 0 0 0 4px rgba(191,167,122,0.12);
+        }
+        /* effets visuels non-disruptifs (transform n'affecte pas le flux) */
+        .header-container nav a:hover { transform: translateY(-2px); }
+        .header-container nav a:active { transform: translateY(0); }
+        .header-container nav a.active { transform: none; }
+        @media (max-width: 900px) {
+            .header-container nav ul { gap: 12px; }
+        }
+
+        /* Garantit que le footer reste collé en bas */
+        html, body { height:100%; margin:0; }
+        .page-wrapper { min-height:100vh; display:flex; flex-direction:column; }
+        main { flex:1 0 auto; }
+        footer { flex-shrink:0; }
+        /* Styles pour la carte dans le panneau contact */
+        .contact-map {
+            width: 100%;
+            height: 260px;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-top: 80px; /* descend la carte davantage dans le cadre */
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        .contact-side .map-note { color: #ddd; font-size: 0.9rem; margin-top:8px; }
+        @media (max-width: 980px) { .contact-map { height: 220px; } }
+
+        /* Styles contacts (suffisants pour affichage) */
+        .contact-wrap { width:100%; max-width:1100px; margin:40px auto; padding:32px 4vw; box-sizing:border-box; }
+        /* align-items: stretch permet d'égaliser la hauteur des colonnes */
+        .contact-grid { display:grid; grid-template-columns:1fr 380px; gap:32px; align-items:stretch; }
+        /* assure que la colonne de gauche (titre + formulaire) remplit la hauteur */
+        .contact-grid > div:first-child { display:flex; flex-direction:column; }
+        .contact-intro {
+            /* même "gutter" intérieur que le formulaire pour aligner les contenus */
+            padding: 0 20px;
+            box-sizing: border-box;
+            width: 100%;
+        }
+        .contact-intro h1,
+        .contact-intro p {
+            margin-left: 0;
+            margin-right: 0;
+            max-width: 100%;
+            overflow-wrap: break-word;
+        }
+        /* décale légèrement le formulaire pour conserver l'alignement visuel */
+        form.contact-form { margin-top: 14px; }
+
+        @media (max-width: 980px) {
+            .contact-intro { padding: 0 12px; }
+            form.contact-form { margin-top: 12px; }
+        }
+
+        form.contact-form { background:#fff; padding:20px; border-radius:8px; box-shadow:0 10px 30px rgba(0,0,0,0.06); }
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+        .form-row.full{grid-template-columns:1fr;}
+        label{display:block;margin-bottom:6px;color:#222;}
+        input, textarea { width:100%; padding:10px; border:1px solid #ddd; border-radius:6px; box-sizing:border-box; }
+        textarea{min-height:140px; resize:vertical;}
+        .form-actions{display:flex;gap:12px;align-items:center;margin-top:6px;}
+        button[type="submit"]{background:#bfa77a;color:#fff;border:none;padding:10px 16px;border-radius:6px;cursor:pointer;}
+        .errors{color:#b00020;margin:8px 0;}
+        .hp{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;}
+        .contact-side{background:#222;color:#fff;padding:20px;border-radius:8px;}
+        .form-success{display:none;background:#e6ffed;border:1px solid #a6e6b8;color:#0a5a20;padding:12px;border-radius:6px;margin-top:12px;}
+
+        /* Force la nav à rester sur la droite de la bannière et conserve le logo centré
+           -> suppression de la règle locale qui forçait la taille du logo afin
+              qu'il hérite de la taille définie globalement (css/style.css) */
+        .header-container { position: relative; display:flex; align-items:center; box-sizing:border-box; }
+        .header-container nav { margin-left: auto; z-index: 40 }
+        .header-container nav ul { list-style:none; margin:0; padding:0; display:flex; gap:18px; align-items:center; }
+        .header-container nav a { color:inherit; text-decoration:none; padding:6px 8px; display:inline-block; }
+        /* garde le logo centré, hors flux, sans affecter la nav */
+        .header-container .site-logo { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); pointer-events:none; z-index:30; }
+        /* NOTE : la règle .header-container .site-logo img a été retirée ici pour que
+                 la taille du logo soit uniforme sur toutes les pages (définie dans css/style.css) */
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <header>
+            <div class="header-container">
+                <a class="site-logo" href="../index.html" aria-hidden="true" tabindex="-1">
+                    <img src="../images/nlogo.png" alt="">
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="../index.html">Accueil</a></li>
+                        <li><a href="apropos.html">À propos</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="realisations.html">Réalisations</a></li>
+                        <li><a href="contact.html" class="active">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <div class="contact-wrap">
+                <div class="contact-grid">
+                    <div>
+                        <div class="contact-intro">
+                            <h1>Contactez‑moi</h1>
+                            <p>Pour un devis ou une question, remplissez le formulaire ci‑dessous. Je vous réponds rapidement.</p>
+                        </div>
+
+                        <form id="contactForm" class="contact-form" action="#" method="post" novalidate>
+                            <div class="hp" aria-hidden="true">
+                                <label for="website">Website</label>
+                                <input id="website" name="website" type="text" autocomplete="off" />
+                            </div>
+
+                            <div id="formErrors" class="errors" aria-live="polite"></div>
+
+                            <div class="form-row">
+                                <div>
+                                    <label for="name">Nom et prénom *</label>
+                                    <input id="name" name="name" type="text" required placeholder="Ex : Jean Dupont" />
+                                </div>
+                                <div>
+                                    <label for="phone">Téléphone</label>
+                                    <input id="phone" name="phone" type="tel" placeholder="+33 6 12 34 56 78" />
+                                </div>
+                            </div>
+
+                            <div class="form-row full">
+                                <div>
+                                    <label for="email">Email *</label>
+                                    <input id="email" name="email" type="email" required placeholder="exemple@domaine.com" />
+                                </div>
+                            </div>
+
+                            <div class="form-row full">
+                                <div>
+                                    <label for="message">Message *</label>
+                                    <textarea id="message" name="message" required placeholder="Décrivez votre projet..."></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit">Envoyer</button>
+                                <button type="reset">Réinitialiser</button>
+                                <div class="note" style="font-size:0.92rem;color:#555;">Les champs marqués * sont obligatoires.</div>
+                            </div>
+
+                            <div id="successMsg" class="form-success" role="status" aria-live="polite">
+                                Merci — votre message a été reçu. Je vous recontacterai bientôt.
+                            </div>
+                        </form>
+                    </div>
+
+                    <aside class="contact-side" aria-label="Informations de contact">
+                        <h3>Informations</h3>
+                        <p><strong>ESCANDE RENOVATION</strong></p>
+                        <p>Tél : <a href="tel:+33753813201" style="color:#fff;text-decoration:underline;">+33 7 53 81 32 01</a></p>
+                        <p>Email : <a href="mailto:escanderenovation@gmail.com" style="color:#fff;text-decoration:underline;">escanderenovation@gmail.com</a></p>
+                        <p>Zone d'intervention : Île‑de‑France et environs</p>
+                        <!-- Carte centrée sur Paris avec rayon d'action 30 km -->
+                        <div id="contactMap" class="contact-map" role="img" aria-label="Carte : Paris centre, rayon 30 km"></div>
+                        <div class="map-note">Rayon d'action : 30 km autour de Paris</div>
+                    </aside>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            &copy; 2025 Escande Rénovation. Tous droits réservés.
+        </footer>
+    </div>
+
+    <script>
+        (function(){
+            const form = document.getElementById('contactForm');
+            const errorsEl = document.getElementById('formErrors');
+            const successEl = document.getElementById('successMsg');
+            const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const phoneRe = /^[0-9+\s().-]{6,20}$/;
+            
+            form.addEventListener('submit', function(e){
+                e.preventDefault();
+                errorsEl.textContent = '';
+                successEl.style.display = 'none';
+    
+                const hp = form.querySelector('input[name="website"]');
+                if (hp && hp.value.trim() !== '') return; // honeypot: bot
+    
+                const name = form.name.value.trim();
+                const email = form.email.value.trim();
+                const phone = form.phone.value.trim();
+                const message = form.message.value.trim();
+    
+                const errors = [];
+                if (!name || name.length < 2) errors.push('Veuillez renseigner votre nom.');
+                if (!email || !emailRe.test(email)) errors.push('Veuillez indiquer une adresse email valide.');
+                if (phone && !phoneRe.test(phone)) errors.push('Le numéro de téléphone est invalide.');
+                if (!message || message.length < 10) errors.push('Le message doit contenir au moins 10 caractères.');
+    
+                if (errors.length) {
+                    errorsEl.innerHTML = errors.map(s => '• ' + s).join('<br>');
+                    return;
+                }
+    
+                // Simulation d'envoi — remplacer par fetch vers API si besoin
+                successEl.style.display = 'block';
+                form.reset();
+            });
+    
+            form.addEventListener('input', function(){
+                if (errorsEl.textContent) errorsEl.textContent = '';
+            });
+        })();
+    </script>
+    <!-- Leaflet JS pour la carte (chargement depuis CDN) -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Initialisation de la carte centrée sur Paris avec un cercle de 30 km
+        (function initContactMap(){
+            // vérifie que Leaflet est disponible et que l'élément existe
+            if (typeof L === 'undefined') return;
+            const el = document.getElementById('contactMap');
+            if (!el) return;
+
+            const paris = [48.8566, 2.3522];
+            // carte, niveau initial 11 pour couvrir 30 km confortablement
+            const map = L.map(el, { scrollWheelZoom: false, dragging: true }).setView(paris, 11);
+
+            // couche OpenStreetMap
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors',
+                maxZoom: 19
+            }).addTo(map);
+
+            // cercle 30 km (30000 m)
+            const circle = L.circle(paris, {
+                radius: 30000,
+                color: '#bfa77a',
+                weight: 2,
+                fillColor: '#bfa77a',
+                fillOpacity: 0.12
+            }).addTo(map);
+
+            // marqueur au centre
+            L.marker(paris).addTo(map).bindPopup('Paris (centre)').openPopup();
+
+            // adapte la vue pour englober le cercle
+            map.fitBounds(circle.getBounds(), { padding: [20,20] });
+        })();
+    </script>
+</body>
+</html>

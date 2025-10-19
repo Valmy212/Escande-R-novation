@@ -1,0 +1,757 @@
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f5f5f5;
+}
+header {
+    background: #222;
+    color: #fff;
+    padding: 0;
+}
+.header-container {
+    display: flex;
+    align-items: center;         /* Centre verticalement le contenu */
+    justify-content: space-between;
+    padding: 40px 40px;
+    height: 100px;               /* Ajoute une hauteur fixe pour garantir le centrage */
+    box-sizing: border-box;
+    position: relative; /* Ajouté pour le positionnement du logo */
+}
+.header-container .site-logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 30;
+    pointer-events: none; /* laisse les onglets cliquables */
+    display: block;
+}
+.header-container .site-logo img {
+    max-height: 180px; /* même taille que sur la page d'accueil */
+    width: auto;
+    display: block;
+    object-fit: contain;
+    background: transparent;
+    margin: 0;
+    padding: 0;
+}
+@media (max-width:900px){
+    .header-container .site-logo img { max-height: 140px; }
+}
+@media (max-width:480px){
+    .header-container .site-logo img { max-height: 100px; top:46%; }
+}
+.site-title {
+    display: flex;
+    align-items: center;         /* Centre verticalement le texte du titre */
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #fff;
+    margin: 0;
+    vertical-align: middle;
+    height: 100%;                /* Prend toute la hauteur de la bannière */
+}
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: flex-end;
+    gap: 30px;
+}
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.3rem;
+    padding: 10px 18px;
+    transition: transform 0.2s, color 0.2s; /* Ajoute la transition pour l'effet */
+}
+nav a:hover,
+nav a:focus {
+    /* Supprime le surlignage et underline */
+    background: none;
+    text-decoration: none;
+    color: #ffb400; /* Optionnel : change la couleur au survol */
+    transform: scale(1.05); /* Effet grandissant */
+}
+.header-container nav a {
+    color: inherit;
+    text-decoration: none;
+    padding: 8px 10px;
+    display: inline-block;
+    transition: color 150ms ease, transform 150ms ease;
+}
+.header-container nav a:hover,
+.header-container nav a:focus {
+    color: #bfa77a;           /* couleur accent (bannière beige) */
+    transform: translateY(-3px);
+    text-decoration: none;
+}
+main {
+    padding: 0;         /* Supprime le padding */
+    max-width: none;    /* Permet à la photo de prendre toute la largeur */
+    margin: 0;
+}
+.hero {
+    background: #e0e0e0;
+    padding: 30px;
+    border-radius: 8px;
+    text-align: center;
+}
+.presentation {
+    margin-top: 40px;
+}
+footer {
+    position: relative;
+    z-index: 10; /* Place le footer au-dessus des autres éléments */
+    background: #222;
+    color: #fff;
+    text-align: center;
+    padding: 24px 0;
+    font-size: 1rem;
+}
+.gallery {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+input, textarea, button {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+button {
+    background: #222;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+button:hover {
+    background: #444;
+}
+.banniere-photo-full {
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+}
+.photo-full {
+    width: 100vw;
+    height: 800px;         /* Ajuste l'épaisseur selon ton besoin */
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+.texte-centre-principal {
+    width: 100%;
+    max-width: 620px;      /* Réduit encore la largeur maximale du texte */
+    margin: 80px auto 80px auto;   /* Réduit l'espace au-dessus et ajoute en dessous */
+    text-align: center;
+    padding: 0 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;         /* Centre le contenu à l'intérieur */
+    justify-content: center;     /* Centre verticalement si besoin */
+    min-height: 80px;           /* Ajuste la hauteur si tu veux plus d'espace */
+}
+.texte-centre-principal h2 {
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 18px;
+    letter-spacing: 1px;
+}
+.texte-centre-principal p {
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 1.2rem;
+    color: #444;
+    line-height: 1.6;
+    font-weight: 500;
+}
+/* Centrage du texte et des images dans la bannière beige de la page d'accueil */
+.banniere-couleur-full {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100vw;
+    height: 800px;
+    background: #bfa77a;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    left: 50%;
+    margin-left: -50vw;
+    flex-direction: row; /* Assure la disposition côte à côte */
+}
+
+.texture-granit-droite {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: auto;
+    max-width: 40vw; /* Ajuste la largeur maximale selon le rendu souhaité */
+    object-fit: cover;
+    display: none;
+}
+
+.texte-haut-banniere {
+    position: static;
+    max-width: 420px;
+    text-align: left;
+    color: #222;
+    padding-left: 0;
+    padding-right: 80px; /* Plus d'espace entre le texte et les images */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Aligne le texte à droite du bloc */
+    justify-content: center;
+    height: auto;
+}
+
+.texte-haut-banniere h2 {
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 2.1rem;
+    font-weight: bold;
+    margin-bottom: 14px;
+    margin-top: 0;
+    letter-spacing: 1px;
+}
+.texte-haut-banniere p {
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 1.15rem;
+    font-weight: 500;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Centrage parfait des cadres dans les deux bannières (beige et blanche) */
+.banniere-couleur-full,
+.banniere-blanche-full {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100vw;
+    height: 800px;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    left: 50%;
+    margin-left: -50vw;
+}
+
+.cadres-photos-banniere,
+.cadres-photos-banniere.services {
+    position: static;
+    display: flex;
+    gap: 80px;
+    z-index: 1;
+    align-items: center;
+    justify-content: center;
+}
+
+.cadre-photo {
+    width: 420px;      /* Encore plus grand */
+    height: 420px;     /* Encore plus grand */
+    background: #fff;
+    border-radius: 0;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cadre-photo-avec-titre {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cadre-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.titre-cadre-photo {
+    text-align: center;
+    width: 100%;
+    margin-top: 36px;   /* Augmente l'espace entre la photo et le titre */
+    margin-bottom: 0;
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #222;
+    letter-spacing: 1px;
+}
+
+.banniere-blanche-full {
+    display: flex;
+    align-items: center;    /* Centre verticalement */
+    justify-content: center;/* Centre horizontalement */
+    position: relative;
+    width: 100vw;
+    height: 800px;
+    background: #fff;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    left: 50%;
+    margin-left: -50vw;
+    display: block;
+}
+
+/* Descend légèrement les cadres dans la bannière blanche pour un centrage visuel */
+.banniere-blanche-full .cadres-photos-banniere {
+    transform: translateY(38%); /* ajuste cette valeur si tu veux descendre/monter davantage */
+}
+
+.banniere-noire-full {
+    width: 100vw;
+    height: 800px;
+    background: #111;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    display: block;
+}
+
+.banniere-blanche-textes {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 0 0 100px;
+    box-sizing: border-box;
+    gap: 100px; /* Augmente encore l'espace entre les 3 blocs */
+}
+
+.banniere-blanche-texte {
+    position: static !important;
+    background: transparent !important;
+    padding: 40px 24px !important; /* valeur neutre ; adapte si besoin */
+    box-shadow: none !important;
+    border: none !important;
+    max-width: 420px;
+    box-sizing: border-box;
+    transform: none !important;
+    transition: none !important;
+    text-align: center; /* conserve l'alignement précédent */
+}
+
+/* Désactive les pseudo-éléments (trombone / coin) */
+.banniere-blanche-texte::before,
+.banniere-blanche-texte::after {
+    display: none !important;
+    content: none !important;
+}
+
+/* Annule les rotations spécifiques */
+.banniere-blanche-texte.gauche,
+.banniere-blanche-texte.centre,
+.banniere-blanche-texte.droite {
+    transform: none !important;
+}
+
+/* Désactive l'effet hover ajouté pour les post-it */
+.banniere-blanche-texte:hover {
+    transform: none !important;
+    box-shadow: none !important;
+    z-index: auto !important;
+}
+
+/* Ajustements mineurs pour garantir l'apparence uniforme */
+.banniere-blanche-texte h3 {
+    margin: 0 0 12px 0;
+    font-size: 1.7rem;
+}
+.banniere-blanche-texte p {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.photo-apropos-gauche {
+    position: absolute;
+    top: 50%;
+    left: 16vw;                /* Décale encore plus vers le centre */
+    transform: translateY(-50%);
+    height: 80%;
+    width: auto;
+    max-width: 48vw;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    z-index: 2;
+    overflow: visible;
+    background: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.photo-apropos-gauche img {
+    width: auto;
+    height: 100%;
+    max-width: 100%;
+    object-fit: contain;      /* Affiche toute la photo sans la couper */
+    display: block;
+}
+
+.texte-apropos-droite {
+    position: absolute;
+    top: 50%;
+    left: calc(16vw + 44vw); /* Décale le texte plus à gauche */
+    transform: translateY(-50%);
+    width: 540px;
+    max-width: 40vw;
+    text-align: left;
+    color: #222;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    background: none;
+    z-index: 2;
+}
+
+.texte-apropos-droite h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0 0 24px 0;
+    letter-spacing: 1px;
+}
+.texte-apropos-droite p {
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif; /* Police moderne */
+    font-size: 1rem;   /* Réduit la taille de la police */f; /* Police moderne */
+    line-height: 1.6;
+    margin: 0 0 18px 0;
+}   margin: 0 0 18px 0;
+/* Répartition et centrage des 4 cadres dans la bannière blanche */
+.banniere-blanche-full .cadres-photos-banniere {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 4vw;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;       /* centre verticalement les cadres dans la bannière */
+    justify-content: space-between; /* répartit les 4 cadres sur la largeur */
+    gap: 40px;
+    position: relative;
+}
+
+.banniere-blanche-full .cadre-photo-avec-titre {
+    flex: 0 1 calc((100% - 3 * 40px) / 4); /* 4 colonnes prenant en compte les gaps */
+    max-width: 320px; /* limite la largeur de chaque colonne */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.banniere-blanche-full .cadre-photo {
+    width: 100%;
+    height: 360px; /* hauteur des cadres, ajuste si nécessaire */
+    max-width: 100%;
+    border-radius: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Titres dessous, espacement cohérent */
+.banniere-blanche-full .titre-cadre-photo {
+    margin-top: 24px;
+}
+
+/* Agrandir les cadres uniquement pour les groupes .services (bannière beige + blanche) */
+.cadres-photos-banniere.services {
+    gap: 96px; /* plus d'espace entre les cadres */
+}
+
+.cadres-photos-banniere.services .cadre-photo-avec-titre {
+    flex: 0 1 420px;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.cadres-photos-banniere.services .cadre-photo {
+    width: 420px;
+    height: 420px;
+    max-width: 100%;
+    border-radius: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cadres-photos-banniere.services .cadre-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Responsive : adapte les nouvelles tailles */
+@media (max-width: 1200px) {
+    .cadres-photos-banniere.services {
+        gap: 48px;
+    }
+    .cadres-photos-banniere.services .cadre-photo-avec-titre {
+        flex: 0 1 300px;
+        max-width: 300px;
+    }
+    .cadres-photos-banniere.services .cadre-photo {
+        width: 300px;
+        height: 300px;
+    }
+}
+
+@media (max-width: 700px) {
+    .cadres-photos-banniere.services {
+        flex-direction: column;
+        gap: 28px;
+        padding: 0 6vw;
+    }
+    .cadres-photos-banniere.services .cadre-photo-avec-titre {
+        flex: 0 0 100%;
+        max-width: 90%;
+        margin: 0 auto;
+    }
+    .cadres-photos-banniere.services .cadre-photo {
+        width: 100%;
+        height: 220px;
+    }
+}
+
+/* Responsive : 2 colonnes sous 1100px, 1 colonne sous 700px */
+@media (max-width: 1100px) {
+    .banniere-blanche-full .cadres-photos-banniere {
+        gap: 24px;
+    }
+    .banniere-blanche-full .cadre-photo-avec-titre {
+        flex: 0 1 calc((100% - 24px) / 2);
+        max-width: 48%;
+    }
+    .banniere-blanche-full .cadre-photo {
+        height: 280px;
+    }
+}
+
+@media (max-width: 700px) {
+    .banniere-blanche-full .cadres-photos-banniere {
+        flex-direction: column;
+        align-items: center;
+        padding: 0 6vw;
+    }
+    .banniere-blanche-full .cadre-photo-avec-titre {
+        flex: 0 0 100%;
+        max-width: 90%;
+        margin-bottom: 20px;
+    }
+    .banniere-blanche-full .cadre-photo {
+        height: 220px;
+    }
+}
+
+/* Responsive design pour toutes les bannières, cadres et textes */
+@media (max-width: 1600px) {
+    .cadre-photo {
+        width: 320px;
+        height: 320px;
+    }
+    .banniere-blanche-texte,
+    .texte-haut-banniere {
+        max-width: 320px;
+    }
+    .texte-apropos-droite {
+        width: 380px;
+        max-width: 48vw;
+    }
+}
+
+@media (max-width: 1200px) {
+    .cadre-photo {
+        width: 220px;
+        height: 220px;
+    }
+    .banniere-blanche-texte,
+    .texte-haut-banniere {
+        max-width: 220px;
+    }
+    .texte-apropos-droite {
+        width: 260px;
+        max-width: 60vw;
+    }
+    .banniere-blanche-textes {
+        gap: 40px;
+        padding-left: 20px;
+    }
+    .cadres-photos-banniere,
+    .cadres-photos-banniere.services {
+        gap: 32px;
+    }
+}
+
+@media (max-width: 900px) {
+    .banniere-couleur-full,
+    .banniere-blanche-full {
+        flex-direction: column;
+        height: auto;
+        min-height: 600px;
+        padding: 40px 0;
+    }
+    .cadres-photos-banniere,
+    .cadres-photos-banniere.services {
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+        width: 100%;
+    }
+    .texte-haut-banniere,
+    .banniere-blanche-texte {
+        padding-right: 0;
+        margin-bottom: 32px;
+        align-items: center;
+        text-align: center;
+        max-width: 90vw;
+    }
+    .banniere-blanche-textes {
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+        padding-left: 0;
+    }
+    .photo-apropos-gauche {
+        position: static;
+        left: 0;
+        top: 0;
+        transform: none;
+        width: 90vw;
+        max-width: 90vw;
+        height: 220px;
+        margin: 0 auto 24px auto;
+        justify-content: center;
+    }
+    .texte-apropos-droite {
+        position: static;
+        left: 0;
+        top: 0;
+        transform: none;
+        width: 90vw;
+        max-width: 90vw;
+        margin: 0 auto;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+@media (max-width: 600px) {
+    .header-container {
+        flex-direction: column;
+        height: auto;
+        padding: 20px 10px;
+    }
+    .site-title {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+    nav ul {
+        gap: 10px;
+    }
+    nav a {
+        font-size: 1rem;
+        padding: 6px 10px;
+    }
+    .cadre-photo {
+        width: 120px;
+        height: 120px;
+    }
+    .titre-cadre-photo,
+    .banniere-blanche-texte h3,
+    .texte-haut-banniere h2 {
+        font-size: 1rem;
+    }
+    .texte-centre-principal,
+    .texte-apropos-droite,
+    .banniere-blanche-texte,
+    .texte-haut-banniere {
+        max-width: 98vw;
+        padding: 0 4vw;
+    }
+    .banniere-couleur-full,
+    .banniere-blanche-full {
+        min-height: 400px;
+        padding: 20px 0;
+    }
+}
+
+/* Responsive : annule le décalage sur petits écrans pour éviter chevauchement */
+@media (max-width: 900px) {
+    .banniere-blanche-full .cadres-photos-banniere {
+        transform: none;
+        margin-top: 18px;
+    }
+}
+
+/* global responsive helpers */
+html { box-sizing: border-box; font-size: 16px; }
+*, *::before, *::after { box-sizing: inherit; }
+
+img, picture, video, iframe { max-width: 100%; height: auto; display: block; }
+
+.container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 4vw; }
+
+/* préférer min-height / padding plutôt que height fixe pour les bannières */
+.banniere-couleur-full { height: auto; min-height: 40vh; padding: 6vh 4vw; }
+
+/* typographie responsive */
+h1, h2, h3 { line-height: 1.15; }
+h1 { font-size: clamp(1.4rem, 4vw, 3.5rem); }
+p { font-size: clamp(0.95rem, 1.8vw, 1.05rem); }
+
+/* media queries */
+@media (max-width: 900px) {
+  .header-container { padding: 10px 3vw; }
+  .header-container .site-logo img { max-height: 120px; }
+  .banniere-couleur-full { padding: 4vh 3vw; min-height: 30vh; }
+}
+@media (max-width: 480px) {
+  .header-container .site-logo img { max-height: 88px; }
+  .banniere-couleur-full { padding: 6vw 4vw; min-height: 28vh; }
+}

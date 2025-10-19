@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>À propos - Escande Rénovation</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Force la nav à droite de la bannière (identique à index.html) */
+        .header-container{
+            position: relative !important;
+            display: flex !important;
+            align-items: center !important;
+            padding: 10px 4vw !important;
+            box-sizing: border-box !important;
+        }
+        /* logo centré sans affecter le flux */
+        .header-container .site-logo{
+            position: absolute !important;
+            left: 50% !important;
+            top: 50% !important;
+            transform: translate(-50%,-50%) !important;
+            pointer-events: none !important;
+            z-index: 30 !important;
+            display: block !important;
+        }
+        /* nav collée à droite et stable */
+        .header-container > nav,
+        .header-container nav { margin-left: auto !important; z-index: 40 !important; display: flex !important; align-items: center !important; }
+        .header-container nav ul {
+            list-style: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            display: flex !important;
+            gap: 18px !important;
+            align-items: center !important;
+            justify-content: flex-end !important;
+        }
+        .header-container nav a{
+            color: inherit !important;
+            text-decoration: none !important;
+            padding: 8px 10px !important;
+            display: inline-block !important;
+            box-sizing: border-box !important;
+            font-weight: 700 !important;
+        }
+        @media (max-width:900px){
+            .header-container nav ul{ gap: 12px !important; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <!-- logo centré : nlogo.png (chemin relatif pour les pages) -->
+            <a class="site-logo" href="../index.html" aria-hidden="true" tabindex="-1">
+                <img src="../images/nlogo.png" alt="">
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Accueil</a></li>
+                    <li><a href="apropos.html" class="active">À propos</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="realisations.html">Réalisations</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="banniere-blanche-full">
+            <div class="photo-apropos-gauche">
+                <img src="../images/photodesign.jpg" alt="Photo à propos">
+            </div>
+            <div class="texte-apropos-droite">
+                <h2>Escande Rénovation : L'Art de Bâtir, Entre Tradition et Avenir</h2>
+                <p>
+                    Escande Rénovation, est l'incarnation d'une entreprise naissante qui a su rapidement s'épanouir. Créée il y a six ans, elle grandi non seulement en taille, mais aussi en expertise, évoluant constamment pour rester à la pointe des techniques et des tendances actuelles.
+                </p>
+                <p>
+                    Le succès repose sur une démarche unique : j'ai bâti mon savoir-faire en collaborant étroitement avec l'ancienne génération d'artisans. Ce précieux héritage m'a transmis la maîtrise des gestes traditionnels et une profonde connaissance des matériaux.
+                </p>
+                <p>
+                    En y intégrant le professionnalisme, les outils numériques et la rigueur de la nouvelle génération, Escande Rénovation propose aujourd'hui un service complet et moderne. Cette synergie unique entre l'expérience éprouvée et l'approche contemporaine me confère une compréhension plus large et plus fine des enjeux de chaque projet.<br><br>
+                    C'est cette double expertise qui me permet d'anticiper vos besoins, d'optimiser chaque détail et de transformer votre vision en un espace à la fois durable, esthétique et parfaitement adapté à votre vie.
+                </p>
+            </div>
+        </section>
+        <section class="banniere-noire-full"></section>
+    </main>
+    <footer>
+        &copy; 2025 Escande Rénovation. Tous droits réservés.
+    </footer>
+</body>
+</html>

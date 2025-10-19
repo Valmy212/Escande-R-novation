@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Accueil - Escande Rénovation</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <style>
+        /* Charger la police GOBOLD (placer les fichiers ./fonts/GOBOLD.woff2 et/ou ./fonts/GOBOLD.woff) */
+        @font-face {
+            font-family: 'GOBOLD';
+            src: url('./fonts/GOBOLD.woff2') format('woff2'),
+                 url('./fonts/GOBOLD.woff') format('woff');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* Restauré : styles locaux minimaux pour la page d'accueil */
+        html,body{height:100%;margin:0;}
+        .page-wrapper{min-height:100vh;display:flex;flex-direction:column;}
+        main{flex:1 0 auto;}
+
+        /* Bannière identique aux autres pages : bloc large avec texte à gauche */
+        .banniere-couleur-full {
+            background: #bfa77a;
+            color: #111;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8vw;
+            box-sizing: border-box;
+            height: 640px;      /* ajusté : un peu plus haut */
+            gap: 2.5vw;
+        }
+
+        /* Bannière blanche (sous la beige) : réduire la hauteur / espacement */
+        .banniere-blanche-full {
+            padding: 18px 8vw;      /* moins de padding vertical */
+            box-sizing: border-box;
+            min-height: 110px;      /* hauteur réduite mais suffisante */
+        }
+
+        /* ajuste le conteneur texte pour rester visuellement équilibré */
+        .texte-haut-banniere { padding: 36px 0; }
+
+        /* ajuste la hauteur des mini-cadres photo dans la bannière pour s'adapter */
+        .cadres-photos-banniere .cadre-photo {
+            height: 320px;
+            max-height: 380px;
+            overflow: hidden;
+        }
+
+        /* Overlay texte centré sur la photo principale */
+        .banniere-photo-full { position: relative; }
+        .photo-full {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+        .photo-overlay {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            text-align: center;
+            z-index: 20;
+        }
+        .photo-overlay .title {
+            margin: 0;
+            color: #000000;
+            text-shadow: none;
+            font-weight: 700;
+            font-family: 'GOBOLD', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: clamp(22px, 5vw, 56px);
+            letter-spacing: 0.5px;
+            background: transparent;
+            padding: 0;
+            border-radius: 0;
+            display: inline-block;
+        }
+        @media (max-width: 480px) {
+            .photo-overlay .title { font-size: clamp(16px, 5.5vw, 22px); padding:4px 10px; }
+        }
+
+        /* Responsive : ajuste la hauteur sur petits écrans */
+        @media (max-width: 900px) {
+            .photo-fullwidth { height: 300px; }
+            .banniere-couleur-full { height:auto; padding:40px 6vw; flex-direction:column; gap:12px; }
+            .banniere-blanche-full { padding: 14px 6vw; min-height: auto; }
+        }
+        @media (max-width: 480px) {
+            .photo-fullwidth { height: 220px; }
+        }
+
+        .container { width:100%;max-width:1200px;margin:0 auto;padding:24px 4vw;box-sizing:border-box; }
+
+        .features { display:grid; grid-template-columns: repeat(3,1fr); gap:18px; margin-top:22px; }
+        .feature { background:#fff;padding:18px;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.06); }
+        .cta { display:flex; align-items:center; justify-content:center; padding:28px; background:#f5f5f5; border-radius:8px; margin-top:26px; }
+
+        @media (max-width:900px){
+            .features { grid-template-columns: 1fr; }
+            .banniere-couleur-full { height:auto; padding:40px 6vw; flex-direction:column; gap:12px; }
+            .texte-haut-banniere { text-align:center; padding:18px 0; }
+            .hero-photo{height:260px;}
+            .cadres-photos-banniere .cadre-photo { height: 180px; max-height: none; }
+        }
+
+        /* référence de hauteur de la bannière (utilisée pour limiter la taille du logo) */
+        .banniere-couleur-full { --banner-height: 640px; }
+
+        /* assure un en-tête centré et une zone disponible pour le logo */
+        .header-container {
+            position: relative; /* nécessaire pour centrer le logo sans déplacer la nav */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 4vw;
+            box-sizing: border-box;
+        }
+
+        /* Logo centré dans la bannière d'en-tête sans toucher à la disposition de la nav */
+        .header-container .site-logo {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 30;
+            pointer-events: none; /* laisse les onglets cliquables */
+            display: block;
+        }
+        .header-container .site-logo img {
+            /* Agrandissement léger : augmenté sans dépasser la bannière */
+            max-height: 180px;
+            height: auto;
+            width: auto;
+            display: block;
+            object-fit: contain;
+            background: transparent;
+            margin: 0;
+            padding: 0;
+        }
+        @media (max-width:900px){
+            .header-container .site-logo img { max-height: 140px; }
+        }
+        @media (max-width:480px){
+            .header-container .site-logo img { max-height: 100px; top:46%; }
+        }
+
+        /* Forcer les onglets (nav) à la droite de la bannière */
+        .header-container nav { margin-left: auto; position: relative; z-index: 40; }
+        .header-container nav ul { list-style: none; display: flex; gap: 18px; margin: 0; padding: 0; align-items: center; }
+        .header-container nav a { color: inherit; text-decoration: none; padding: 8px 10px; display: inline-block; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <!-- logo centré : nlogo.png (chemin relatif pour la page racine) -->
+            <a class="site-logo" href="./index.html" aria-hidden="true" tabindex="-1">
+                <img src="./images/nlogo.png" alt="">
+            </a>
+             <nav>
+                 <ul>
+                     <li><a href="./index.html">Accueil</a></li>
+                     <li><a href="./pages/apropos.html">À propos</a></li>
+                     <li><a href="./pages/services.html">Services</a></li>
+                     <li><a href="./pages/realisations.html">Réalisations</a></li>
+                     <li><a href="./pages/contact.html">Contact</a></li>
+                 </ul>
+             </nav>
+         </div>
+    </header>
+    <main>
+        <section class="banniere-photo-full" aria-label="Photo d'accueil">
+            <img src="images/photoaccueil2.jpg" alt="Photo accueil" class="photo-full">
+            <div class="photo-overlay" aria-hidden="false">
+                <h1 class="title">ESCANDE RENOVATION</h1>
+            </div>
+        </section>
+        <section class="texte-centre-principal">
+            <h2>VOTRE PROJET, MA MAÎTRISE</h2>
+            <p class="subtitle"><strong>Je bâtis avec exigence et passion.</p>
+            <p>
+                Spécialiste du bâtiment aux multiples compétences, je vous accompagne de la conception à la touche finale.<br>
+                Confiez‑moi vos idées : je les concrétise en toute transparence, dans le respect de vos attentes et du savoir‑faire.
+            </p>
+        </section>
+        <section class="banniere-couleur-full">
+            <div class="texte-haut-banniere">
+                <h2>Je transforme vos rêves en réalité</h2>
+                <p>
+                    À travers mes compétences polyvalentes dans le domaine du bâtiment, je réalise tous vos travaux en respectant chaque étape, toutes aussi importantes les unes que les autres.
+                </p>
+            </div>
+            <div class="cadres-photos-banniere">
+                <div class="cadre-photo-avec-titre">
+                    <div class="cadre-photo">
+                        <img src="images/demolition.jpg" alt="Démolition">
+                    </div>
+                    <h3 class="titre-cadre-photo">Démolition</h3>
+                </div>
+                <div class="cadre-photo-avec-titre">
+                    <div class="cadre-photo">
+                        <img src="images/construction.jpg" alt="Construction & rénovation">
+                    </div>
+                    <h3 class="titre-cadre-photo">Construction &amp; rénovation</h3>
+                </div>
+                <div class="cadre-photo-avec-titre">
+                    <div class="cadre-photo">
+                        <img src="images/nettoyage.jpg" alt="Nettoyage">
+                    </div>
+                    <h3 class="titre-cadre-photo">Nettoyage</h3>
+                </div>
+
+               
+        </section>
+        <section class="banniere-blanche-full">
+            <div class="banniere-blanche-textes">
+                <div class="banniere-blanche-texte gauche">
+                    <h3>Respect</h3>
+                    <p>
+                        Je suis à l’écoute de vos besoins et je considère chacun de vos souhaits.<br>
+                        Je rédige les devis en toute transparence et je respecte chaque étape du processus, une fois qu’elle est définie et validée par vous.
+                    </p>
+                </div>
+                <div class="banniere-blanche-texte centre">
+                    <h3>Polyvalence</h3>
+                    <p>
+                        Je réalise la rénovation de vos rêves en tant que prestataire unique.<br>
+                        Grâce à mon expérience dans tous les secteurs du bâtiment, je prends en charge votre projet de A à Z.
+                    </p>
+                </div>
+                <div class="banniere-blanche-texte droite">
+                    <h3>Rigueur</h3>
+                    <p>
+                        Au service de l’excellence et de la beauté, j’accomplis des travaux de façon irréprochable et minutieuse.<br>
+                        Tout est dans le détail : rien n’est négligé pour un rendu final parfait et un client comblé.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        &copy; 2025 Escande Rénovation. Tous droits réservés.
+    </footer>
+
+    <script>
+        // Synchronise la hauteur de .banniere-blanche-full avec celle de la section de référence
+        (function(){
+            const refSel = '.texte-centre-principal';
+            const targetSel = '.banniere-blanche-full';
+            const ref = () => document.querySelector(refSel);
+            const target = () => document.querySelector(targetSel);
+
+            let resizeTimer = null;
+            function syncHeight(){
+                const r = ref();
+                const t = target();
+                if (!r || !t) return;
+                // reset pour mesurer correctement
+                t.style.minHeight = '';
+                // calcule la hauteur effective (incluant marges visuelles via getBoundingClientRect)
+                const h = Math.round(r.getBoundingClientRect().height);
+                // applique la même hauteur (ajuste si besoin, ici 0px offset)
+                t.style.minHeight = h + 'px';
+            }
+
+            // Attendre que les polices et images soient chargées pour mesure précise
+            window.addEventListener('load', syncHeight);
+            window.addEventListener('DOMContentLoaded', syncHeight);
+            window.addEventListener('resize', function(){
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(syncHeight, 120);
+            });
+            // cas d'images latenly loaded (observe mutations)
+            const observer = new MutationObserver(syncHeight);
+            observer.observe(document.body, { childList: true, subtree: true, attributes: false });
+        })();
+    </script>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
