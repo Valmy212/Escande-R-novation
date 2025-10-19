@@ -10,25 +10,25 @@
             position: relative !important;
             display: flex !important;
             align-items: center !important;
+            justify-content: space-between !important;
             padding: 10px 4vw !important;
             box-sizing: border-box !important;
+            gap: 12px !important;
         }
         .header-container .site-logo {
-            position: absolute !important;
-            left: 50% !important;
-            top: 50% !important;
-            transform: translate(-50%, -50%) !important;
-            pointer-events: none !important;
+            position: relative !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: flex-start !important;
             z-index: 30 !important;
-            display: block !important;
         }
-        .header-container nav {
+        .site-nav {
             margin-left: auto !important;
             z-index: 40 !important;
             display: flex !important;
             align-items: center !important;
         }
-        .header-container nav ul {
+        .site-nav ul {
             list-style: none !important;
             margin: 0 !important;
             padding: 0 !important;
@@ -37,7 +37,7 @@
             align-items: center !important;
             justify-content: flex-end !important;
         }
-        .header-container nav a {
+        .site-nav a {
             color: inherit !important;
             text-decoration: none !important;
             padding: 8px 10px !important;
@@ -45,7 +45,7 @@
             box-sizing: border-box !important;
         }
         @media (max-width: 900px) {
-            .header-container nav ul { gap: 12px !important; }
+            .site-nav ul { gap: 12px !important; }
         }
         /* FIN : règles forcées pour uniformiser la position des onglets */
 
@@ -311,7 +311,11 @@
                 <a class="site-logo" href="../index.html" aria-hidden="true" tabindex="-1">
                     <img src="../images/nlogo.png" alt="">
                 </a>
-                <nav>
+                <button class="nav-toggle" type="button" aria-label="Ouvrir le menu" aria-controls="site-nav" aria-expanded="false">
+                    <span class="nav-toggle-label">Menu</span>
+                    <span class="nav-toggle-icon" aria-hidden="true"></span>
+                </button>
+                <nav id="site-nav" class="site-nav">
                     <ul>
                         <li><a href="../index.html">Accueil</a></li>
                         <li><a href="apropos.html">À propos</a></li>
@@ -420,6 +424,7 @@
         </footer>
     </div>
 
+        <script src="../js/main.js"></script>
     <script>
         (function(){
             const track = document.querySelector('.carousel .c-track');

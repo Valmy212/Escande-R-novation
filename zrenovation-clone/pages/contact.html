@@ -12,25 +12,25 @@
             position: relative;
             display: flex;
             align-items: center;
+            justify-content: space-between;
             padding: 10px 4vw;
             box-sizing: border-box;
+            gap: 12px;
         }
         .header-container .site-logo {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
             z-index: 30;
-            display: block;
         }
-        .header-container nav {
+        .site-nav {
             margin-left: auto !important;
             z-index: 40;
             display: flex;
             align-items: center;
         }
-        .header-container nav ul {
+        .site-nav ul {
             list-style: none;
             margin: 0;
             padding: 0;
@@ -39,10 +39,10 @@
             align-items: center;
             justify-content: flex-end;
         }
-        .header-container nav li { display: inline-block; }
+        .site-nav li { display: inline-block; }
 
         /* --- Stabilité des onglets : réserver l'espace (border transparent) et garder métriques identiques --- */
-        .header-container nav a {
+        .site-nav a {
             box-sizing: border-box;
             display: inline-flex;
             align-items: center;
@@ -58,25 +58,24 @@
             font-weight: 700; /* même graisse dans tous les états */
         }
         /* s'assurer que tous les états conservent exactement la même boîte (pas de reflow) */
-        .header-container nav a:focus,
-        .header-container nav a:hover,
-        .header-container nav a:active,
-        .header-container nav a.active,
-        .header-container nav a:visited {
-            font-weight: 700;
-            padding: 8px 10px;
+        .site-nav a:focus,
+        .site-nav a:hover,
+        .site-nav a:active,
+        .site-nav a.active,
+        .site-nav a:visited {
             border-color: transparent;
+            padding: 8px 10px;
         }
         /* affichage d'un halo au focus sans toucher à la métrique */
-        .header-container nav a:focus {
+        .site-nav a:focus {
             box-shadow: 0 0 0 4px rgba(191,167,122,0.12);
         }
         /* effets visuels non-disruptifs (transform n'affecte pas le flux) */
-        .header-container nav a:hover { transform: translateY(-2px); }
-        .header-container nav a:active { transform: translateY(0); }
-        .header-container nav a.active { transform: none; }
+        .site-nav a:hover { transform: translateY(-2px); }
+        .site-nav a:active { transform: translateY(0); }
+        .site-nav a.active { transform: none; }
         @media (max-width: 900px) {
-            .header-container nav ul { gap: 12px; }
+            .site-nav ul { gap: 12px; }
         }
 
         /* Garantit que le footer reste collé en bas */
@@ -139,10 +138,10 @@
         /* Force la nav à rester sur la droite de la bannière et conserve le logo centré
            -> suppression de la règle locale qui forçait la taille du logo afin
               qu'il hérite de la taille définie globalement (css/style.css) */
-        .header-container { position: relative; display:flex; align-items:center; box-sizing:border-box; }
-        .header-container nav { margin-left: auto; z-index: 40 }
-        .header-container nav ul { list-style:none; margin:0; padding:0; display:flex; gap:18px; align-items:center; }
-        .header-container nav a { color:inherit; text-decoration:none; padding:6px 8px; display:inline-block; }
+    .header-container { position: relative; display:flex; align-items:center; box-sizing:border-box; }
+    .site-nav { margin-left: auto; z-index: 40; }
+    .site-nav ul { list-style:none; margin:0; padding:0; display:flex; gap:18px; align-items:center; }
+    .site-nav a { color:inherit; text-decoration:none; padding:6px 8px; display:inline-block; }
         /* garde le logo centré, hors flux, sans affecter la nav */
         .header-container .site-logo { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); pointer-events:none; z-index:30; }
         /* NOTE : la règle .header-container .site-logo img a été retirée ici pour que
@@ -156,7 +155,11 @@
                 <a class="site-logo" href="../index.html" aria-hidden="true" tabindex="-1">
                     <img src="../images/nlogo.png" alt="">
                 </a>
-                <nav>
+                <button class="nav-toggle" type="button" aria-label="Ouvrir le menu" aria-controls="site-nav" aria-expanded="false">
+                    <span class="nav-toggle-label">Menu</span>
+                    <span class="nav-toggle-icon" aria-hidden="true"></span>
+                </button>
+                <nav id="site-nav" class="site-nav">
                     <ul>
                         <li><a href="../index.html">Accueil</a></li>
                         <li><a href="apropos.html">À propos</a></li>
@@ -241,6 +244,7 @@
         </footer>
     </div>
 
+    <script src="../js/main.js"></script>
     <script>
         (function(){
             const form = document.getElementById('contactForm');
