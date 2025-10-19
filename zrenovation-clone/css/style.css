@@ -141,7 +141,8 @@ header {
     .site-nav a {
         display: block;
         padding: 14px 24px;
-        font-size: 1.1rem;
+        font-size: 1rem;
+        font-weight: 500;
     }
 
     .site-nav.is-open {
@@ -171,9 +172,9 @@ nav ul {
 nav a {
     color: #fff;
     text-decoration: none;
-    font-weight: bold;
-    font-size: 1.3rem;
-    padding: 10px 18px;
+    font-weight: 500;
+    font-size: 1.05rem;
+    padding: 10px 16px;
     transition: transform 0.2s, color 0.2s; /* Ajoute la transition pour l'effet */
 }
 nav a:hover,
@@ -196,6 +197,114 @@ nav a:focus {
     color: #bfa77a;           /* couleur accent (bannière beige) */
     transform: translateY(-3px);
     text-decoration: none;
+}
+
+.hero-slider {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 520px;
+    padding-bottom: 28px;
+}
+
+.hero-slider-viewport {
+    overflow: hidden;
+    width: 100%;
+}
+
+.hero-slider-track {
+    display: flex;
+    transform: translateX(0);
+    transition: transform 360ms ease;
+}
+
+.hero-slide {
+    flex: 0 0 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 6px;
+    box-sizing: border-box;
+}
+
+.hero-slider-nav {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.9);
+    color: #222;
+    cursor: pointer;
+    font-size: 1.4rem;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.hero-slider-nav:hover,
+.hero-slider-nav:focus {
+    transform: scale(1.05);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+}
+
+.hero-slider-dots {
+    position: absolute;
+    bottom: -28px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
+
+.hero-slider-dots button {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: background 150ms ease;
+}
+
+.hero-slider-dots button.is-active {
+    background: #222;
+}
+
+.hero-slider-nav--prev { order: 0; }
+.hero-slider-viewport { order: 1; }
+.hero-slider-nav--next { order: 2; }
+.hero-slider-dots { order: 3; }
+
+@media (max-width: 900px) {
+    .hero-slider {
+        max-width: 100%;
+        gap: 10px;
+    }
+    .hero-slider-nav {
+        width: 36px;
+        height: 36px;
+        font-size: 1.2rem;
+    }
+    .hero-slider-dots {
+        bottom: -24px;
+    }
+}
+
+@media (max-width: 600px) {
+    .hero-slider {
+        gap: 6px;
+    }
+    .hero-slider-nav {
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
+    }
 }
 main {
     padding: 0;         /* Supprime le padding */
@@ -270,11 +379,11 @@ button:hover {
     width: 100%;
     max-width: 620px;      /* Réduit encore la largeur maximale du texte */
     margin: 80px auto 80px auto;   /* Réduit l'espace au-dessus et ajoute en dessous */
-    text-align: center;
+    text-align: left;
     padding: 0 12px;
     display: flex;
     flex-direction: column;
-    align-items: center;         /* Centre le contenu à l'intérieur */
+    align-items: flex-start;
     justify-content: center;     /* Centre verticalement si besoin */
     min-height: 80px;           /* Ajuste la hauteur si tu veux plus d'espace */
 }
@@ -292,6 +401,7 @@ button:hover {
     color: #444;
     line-height: 1.6;
     font-weight: 500;
+    text-align: left;
 }
 /* Centrage du texte et des images dans la bannière beige de la page d'accueil */
 .banniere-couleur-full {

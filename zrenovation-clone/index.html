@@ -45,7 +45,7 @@
         .texte-haut-banniere { padding: 36px 0; }
 
         /* ajuste la hauteur des mini-cadres photo dans la bannière pour s'adapter */
-        .cadres-photos-banniere .cadre-photo {
+        .hero-slider .cadre-photo {
             height: 320px;
             max-height: 380px;
             overflow: hidden;
@@ -106,7 +106,7 @@
             .banniere-couleur-full { height:auto; padding:40px 6vw; flex-direction:column; gap:12px; }
             .texte-haut-banniere { text-align:center; padding:18px 0; }
             .hero-photo{height:260px;}
-            .cadres-photos-banniere .cadre-photo { height: 180px; max-height: none; }
+            .hero-slider .cadre-photo { height: 180px; max-height: none; }
         }
 
         /* référence de hauteur de la bannière (utilisée pour limiter la taille du logo) */
@@ -176,9 +176,7 @@
     <main>
         <section class="banniere-photo-full" aria-label="Photo d'accueil">
             <img src="images/photoaccueil2.jpg" alt="Photo accueil" class="photo-full">
-            <div class="photo-overlay" aria-hidden="false">
-                <h1 class="title">ESCANDE RENOVATION</h1>
-            </div>
+            <div class="photo-overlay" aria-hidden="true"></div>
         </section>
         <section class="texte-centre-principal">
             <h2>VOTRE PROJET, MA MAÎTRISE</h2>
@@ -195,24 +193,41 @@
                     À travers mes compétences polyvalentes dans le domaine du bâtiment, je réalise tous vos travaux en respectant chaque étape, toutes aussi importantes les unes que les autres.
                 </p>
             </div>
-            <div class="cadres-photos-banniere">
-                <div class="cadre-photo-avec-titre">
-                    <div class="cadre-photo">
-                        <img src="images/demolition.jpg" alt="Démolition">
+            <div class="hero-slider" data-slider="hero">
+                <button class="hero-slider-nav hero-slider-nav--prev" type="button" aria-label="Voir la réalisation précédente" data-slider-prev>‹</button>
+                <div class="hero-slider-viewport">
+                    <div class="hero-slider-track">
+                        <article class="hero-slide">
+                            <div class="cadre-photo-avec-titre">
+                                <div class="cadre-photo">
+                                    <img src="images/demolition.jpg" alt="Démolition">
+                                </div>
+                                <h3 class="titre-cadre-photo">Démolition</h3>
+                            </div>
+                        </article>
+                        <article class="hero-slide">
+                            <div class="cadre-photo-avec-titre">
+                                <div class="cadre-photo">
+                                    <img src="images/construction.jpg" alt="Construction et rénovation">
+                                </div>
+                                <h3 class="titre-cadre-photo">Construction &amp; rénovation</h3>
+                            </div>
+                        </article>
+                        <article class="hero-slide">
+                            <div class="cadre-photo-avec-titre">
+                                <div class="cadre-photo">
+                                    <img src="images/nettoyage.jpg" alt="Nettoyage">
+                                </div>
+                                <h3 class="titre-cadre-photo">Nettoyage</h3>
+                            </div>
+                        </article>
                     </div>
-                    <h3 class="titre-cadre-photo">Démolition</h3>
                 </div>
-                <div class="cadre-photo-avec-titre">
-                    <div class="cadre-photo">
-                        <img src="images/construction.jpg" alt="Construction & rénovation">
-                    </div>
-                    <h3 class="titre-cadre-photo">Construction &amp; rénovation</h3>
-                </div>
-                <div class="cadre-photo-avec-titre">
-                    <div class="cadre-photo">
-                        <img src="images/nettoyage.jpg" alt="Nettoyage">
-                    </div>
-                    <h3 class="titre-cadre-photo">Nettoyage</h3>
+                <button class="hero-slider-nav hero-slider-nav--next" type="button" aria-label="Voir la réalisation suivante" data-slider-next>›</button>
+                <div class="hero-slider-dots" role="tablist">
+                    <button type="button" class="is-active" data-slide="0" aria-label="Afficher Démolition"></button>
+                    <button type="button" data-slide="1" aria-label="Afficher Construction et rénovation"></button>
+                    <button type="button" data-slide="2" aria-label="Afficher Nettoyage"></button>
                 </div>
             </div>
         </section>
