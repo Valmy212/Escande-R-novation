@@ -23,25 +23,15 @@
             justify-content: flex-start;
             z-index: 30;
         }
-        /* nav collée à droite — règle renforcée pour éviter héritages indésirables */
-        .site-nav { margin-left: auto !important; z-index: 40; display: flex; align-items: center; }
-        .site-nav ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            gap: 18px;
-            align-items: center;
-            justify-content: flex-end;
-        }
-        .site-nav a {
-            color: inherit;
-            text-decoration: none;
-            padding: 8px 10px;
-            display: inline-block;
-        }
-        @media (max-width: 900px) {
-            .site-nav ul { gap: 12px; }
+        @media (min-width: 781px) {
+            .site-nav { margin-left: auto; z-index: 40; }
+            .site-nav ul {
+                gap: 18px;
+                justify-content: flex-end;
+            }
+            .site-nav a {
+                padding: 8px 10px;
+            }
         }
     </style>
 </head>
