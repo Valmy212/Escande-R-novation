@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>À propos - Escande Rénovation</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Force la nav à droite de la bannière (identique à index.html) */
+        .header-container{
+            position: relative !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            padding: 10px 4vw !important;
+            box-sizing: border-box !important;
+            gap: 12px !important;
+        }
+        /* logo fixé à gauche */
+        .header-container .site-logo{
+            position: relative !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: flex-start !important;
+            z-index: 30 !important;
+        }
+        @media (min-width: 781px) {
+            .site-nav { margin-left: auto; z-index: 40; }
+            .site-nav ul {
+                gap: 18px;
+                justify-content: flex-end;
+            }
+            .site-nav a {
+                padding: 8px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <!-- logo centré : nlogo.png (chemin relatif pour les pages) -->
+            <a class="site-logo" href="../index.html" aria-hidden="true" tabindex="-1">
+                <img src="../images/nlogo.png" alt="">
+            </a>
+            <button class="nav-toggle" type="button" aria-label="Ouvrir le menu" aria-controls="site-nav" aria-expanded="false">
+                <span class="nav-toggle-label">Menu</span>
+                <span class="nav-toggle-icon" aria-hidden="true"></span>
+            </button>
+            <nav id="site-nav" class="site-nav">
+                <ul>
+                    <li><a href="../index.html">Accueil</a></li>
+                    <li><a href="apropos.html" class="active">À propos</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="realisations.html">Réalisations</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="apropos-intro">
+            <div class="apropos-intro-wrapper">
+                <div class="apropos-intro-image">
+                    <img src="../images/photodesign.jpg" alt="Photo atelier et outils de rénovation">
+                </div>
+                <div class="apropos-intro-text">
+                    <span class="apropos-intro-eyebrow">Escande Rénovation</span>
+                    <h1>Faire dialoguer héritage artisanal et vision moderne</h1>
+                    <p>
+                        Escande Rénovation est une entreprise jeune qui a grandi vite. En six ans, elle s'est forgée une identité solide en faisant évoluer sa maîtrise technique au rythme des nouvelles attentes du marché et des innovations métiers.
+                    </p>
+                    <p>
+                        Cette progression s'appuie sur un apprentissage au contact de l'ancienne génération d'artisans. Leur sens du geste juste et leur connaissance des matériaux sont devenus les fondations de ma pratique quotidienne.
+                    </p>
+                    <div class="apropos-intro-highlight">
+                        <p>
+                            Aujourd'hui, j'allie ce savoir-faire transmis avec des méthodes actuelles pour piloter vos chantiers de A à Z. Cette double culture me permet d'anticiper chaque étape, de sécuriser les délais et d'offrir des réalisations durables, élégantes et pensées pour votre confort.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="apropos-values">
+            <div class="apropos-values-wrapper">
+                <div class="apropos-values-intro">
+                    <h2>Une exigence partagée à chaque projet</h2>
+                    <p>
+                        Chaque rénovation est menée avec proximité, transparence et exigence. Je vous accompagne personnellement, de la conception aux finitions, avec une attention soutenue portée aux détails qui font la différence.
+                    </p>
+                </div>
+                <div class="apropos-values-grid">
+                    <article class="apropos-value-card">
+                        <h3>Héritage maîtrisé</h3>
+                        <p>
+                            Je capitalise sur l'expérience des artisans qui m'ont formé pour garantir des interventions respectueuses des matériaux et des méthodes traditionnelles.
+                        </p>
+                    </article>
+                    <article class="apropos-value-card">
+                        <h3>Innovation pragmatique</h3>
+                        <p>
+                            Je m'équipe d'outils numériques et de process contemporains pour fluidifier le suivi de chantier, sécuriser vos décisions et optimiser les délais.
+                        </p>
+                    </article>
+                    <article class="apropos-value-card">
+                        <h3>Accompagnement global</h3>
+                        <p>
+                            Je reste votre interlocuteur unique pour coordonner les métiers, vérifier chaque finition et livrer un résultat fidèle à votre vision initiale.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        &copy; 2025 Escande Rénovation. Tous droits réservés.
+    </footer>
+    <script src="../js/main.js"></script>
+</body>
+</html>
