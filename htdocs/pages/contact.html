@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Contact - Escande Rénovation</title>
     <link rel="stylesheet" href="../css/style.css">
     <!-- Leaflet CSS pour la carte -->
@@ -24,56 +25,58 @@
             justify-content: flex-start;
             z-index: 30;
         }
-        .site-nav {
-            margin-left: auto !important;
-            z-index: 40;
-            display: flex;
-            align-items: center;
-        }
-        .site-nav ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            gap: 18px;
-            align-items: center;
-            justify-content: flex-end;
-        }
-        .site-nav li { display: inline-block; }
+        @media (min-width: 781px) {
+            .site-nav {
+                margin-left: auto;
+                z-index: 40;
+                display: flex;
+                align-items: center;
+            }
+            .site-nav ul {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                gap: 18px;
+                align-items: center;
+                justify-content: flex-end;
+            }
+            .site-nav li { display: inline-block; }
 
-        /* --- Stabilité des onglets : réserver l'espace (border transparent) et garder métriques identiques --- */
-        .site-nav a {
-            box-sizing: border-box;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 8px 10px;
-            color: inherit;
-            text-decoration: none !important;
-            background: transparent;
-            border: 2px solid transparent; /* réserve l'espace si on veut afficher une bordure au focus */
-            outline: none;
-            transition: color .18s ease, transform .18s ease, box-shadow .18s ease;
-            -webkit-tap-highlight-color: transparent;
-            font-weight: 500; /* même graisse dans tous les états */
+            /* --- Stabilité des onglets : réserver l'espace (border transparent) et garder métriques identiques --- */
+            .site-nav a {
+                box-sizing: border-box;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                padding: 8px 10px;
+                color: inherit;
+                text-decoration: none;
+                background: transparent;
+                border: 2px solid transparent; /* réserve l'espace si on veut afficher une bordure au focus */
+                outline: none;
+                transition: color .18s ease, transform .18s ease, box-shadow .18s ease;
+                -webkit-tap-highlight-color: transparent;
+                font-weight: 500; /* même graisse dans tous les états */
+            }
+            /* s'assurer que tous les états conservent exactement la même boîte (pas de reflow) */
+            .site-nav a:focus,
+            .site-nav a:hover,
+            .site-nav a:active,
+            .site-nav a.active,
+            .site-nav a:visited {
+                border-color: transparent;
+                padding: 8px 10px;
+            }
+            /* affichage d'un halo au focus sans toucher à la métrique */
+            .site-nav a:focus {
+                box-shadow: 0 0 0 4px rgba(191,167,122,0.12);
+            }
+            /* effets visuels non-disruptifs (transform n'affecte pas le flux) */
+            .site-nav a:hover { transform: translateY(-2px); }
+            .site-nav a:active { transform: translateY(0); }
+            .site-nav a.active { transform: none; }
         }
-        /* s'assurer que tous les états conservent exactement la même boîte (pas de reflow) */
-        .site-nav a:focus,
-        .site-nav a:hover,
-        .site-nav a:active,
-        .site-nav a.active,
-        .site-nav a:visited {
-            border-color: transparent;
-            padding: 8px 10px;
-        }
-        /* affichage d'un halo au focus sans toucher à la métrique */
-        .site-nav a:focus {
-            box-shadow: 0 0 0 4px rgba(191,167,122,0.12);
-        }
-        /* effets visuels non-disruptifs (transform n'affecte pas le flux) */
-        .site-nav a:hover { transform: translateY(-2px); }
-        .site-nav a:active { transform: translateY(0); }
-        .site-nav a.active { transform: none; }
         @media (max-width: 900px) {
             .site-nav ul { gap: 12px; }
         }
